@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+<<<<<<< HEAD
 import {sum, minus} from './func/math'
+=======
+>>>>>>> c56240a48489d41d076bb055eb728e19f4bb6fcf
 
 function App() {
   //값 비교(Primitive Type)
@@ -27,10 +30,13 @@ function App() {
   console.log(obj1 === obj2);
   console.log(Object.is(obj1, obj2));
 
+<<<<<<< HEAD
   console.log('-----------------');
   console.log(sum(10,20));
   console.log(minus(10,20));
 
+=======
+>>>>>>> c56240a48489d41d076bb055eb728e19f4bb6fcf
   return (
     <div className="App">
       <h1>리액트 테스트</h1>
