@@ -1,9 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-<<<<<<< HEAD
 import {sum, minus} from './func/math'
-=======
->>>>>>> c56240a48489d41d076bb055eb728e19f4bb6fcf
 
 function App() {
   //값 비교(Primitive Type)
