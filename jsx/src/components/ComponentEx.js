@@ -7,6 +7,9 @@ export default function ComponentEx() {
     const items = ['item1', 'item2', 'item3'];
 
     const style = {color:'red', fontSize:'20px',backgroundColor:'yellow'};
+
+    let flag = false;
+
     return (
         <div>
             <h2>태그는 반드시 닫아야 됨, 단일태그도 포함</h2>
@@ -25,6 +28,8 @@ export default function ComponentEx() {
                 인라인 스타일 적용 방법
             </div>            
             <div style={style}>스타일 적용방법</div>
+            <h3>조건부 렌더링</h3>
+            {flag ? <h3>true 일때</h3> : <h3>false 일때</h3>}
         </div>
     );
 }
