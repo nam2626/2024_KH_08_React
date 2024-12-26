@@ -4,6 +4,7 @@ import ButtonOK from './components/ButtonOK';
 import PropsEx from './components/PropsEx';
 import ButtonCount from './components/ButtonCount';
 import ItemList from './components/ItemList';
+import Product from './quest/Product';
 
 const obj = {
     count : 0
@@ -25,6 +26,8 @@ function App() {
       <ButtonCount count={obj.count} addCount={addCount}/>
       <hr/>
       <ItemList/>
+      <hr/>
+      <Product/>
     </div>
   );
 }
