@@ -3,6 +3,7 @@ import './App.css';
 import ButtonOK from './components/ButtonOK';
 import PropsEx from './components/PropsEx';
 import ButtonCount from './components/ButtonCount';
+import ItemList from './components/ItemList';
 
 const obj = {
     count : 0
@@ -22,6 +23,8 @@ function App() {
       <PropsEx name='홍길동' age='30'/>
       <hr/>
       <ButtonCount count={obj.count} addCount={addCount}/>
+      <hr/>
+      <ItemList/>
     </div>
   );
 }
