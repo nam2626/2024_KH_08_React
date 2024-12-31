@@ -5,6 +5,7 @@ import LoginForm from './components/LoginForm';
 import ColorToggle from './components/ColorToggle';
 import Counter from './components/Counter';
 import AlertState from './components/AlertState';
+import SignUpForm from './components/SignUpForm';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
       <Counter/>
       <hr/>
       <AlertState/>
+      <hr/>
+      <SignUpForm/>
     </div>
   );
 }
