@@ -4,6 +4,7 @@ import EffectEx from './components/EffectEx';
 import LoginForm from './components/LoginForm';
 import RefEx from './components/RefEx';
 import MemoEx from './components/MemoEx';
+import Callback from './components/Callback';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
       <RefEx/>
       <hr/>
       <MemoEx/>
+      <hr/>
+      <Callback/>
     </div>
   );
 }
