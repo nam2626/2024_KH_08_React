@@ -5,6 +5,7 @@ import LoginForm from './components/LoginForm';
 import RefEx from './components/RefEx';
 import MemoEx from './components/MemoEx';
 import Callback from './components/Callback';
+import ContextComponent from './components/ContextComponent';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
       <MemoEx/>
       <hr/>
       <Callback/>
+      <hr/>
+      <ContextComponent/>
     </div>
   );
 }
