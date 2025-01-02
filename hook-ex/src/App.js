@@ -3,6 +3,7 @@ import './App.css';
 import EffectEx from './components/EffectEx';
 import LoginForm from './components/LoginForm';
 import RefEx from './components/RefEx';
+import MemoEx from './components/MemoEx';
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
       <LoginForm/>
       <hr/>
       <RefEx/>
+      <hr/>
+      <MemoEx/>
     </div>
   );
 }
