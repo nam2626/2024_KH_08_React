@@ -1,6 +1,6 @@
 import TodoListItem from "./TodoListItem";
 
-export default function TodoList({todoList, deleteTodo}) {
+export default function TodoList({todoList, deleteTodo, updateTodo}) {
     console.log(todoList)
     return (
         <div>
@@ -16,7 +16,7 @@ export default function TodoList({todoList, deleteTodo}) {
                 <tbody>
                     {
                         todoList.map(todo => {
-                            return <TodoListItem key={todo.id} todo={todo} deleteTodo={deleteTodo} />
+                            return <TodoListItem key={todo.id} todo={todo} deleteTodo={deleteTodo} updateTodo={updateTodo} />
                         })
                     }
                     

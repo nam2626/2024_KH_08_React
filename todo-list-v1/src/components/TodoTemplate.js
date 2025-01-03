@@ -20,16 +20,29 @@ export default function TodoTemplate() {
     const [todoList, setTodoList] = useState(makeTodo());
     console.log(todoList);
     const deleteTodo = useCallback((id) => {
-        //id 값을 가지고 toList에 있는 값을 제거
+        //id 값을 가지고 todoList에 있는 값을 제거
         setTodoList((todos) => {
             return todos.filter((todo) => todo.id !== id);
         });
     },[]);
 
+    const updateTodo = useCallback((id) => {
+        //id에 가지고 todoList에 있는 id에 해당하는 done 값을 반대로 변경
+        setTodoList((todos) => {
+            return todos.map((todo) => {
+                if (todo.id === id) {
+                    return {...todo, done: !todo.done};
+                }
+                return todo;
+            });
+        });
+    },[]);
+
+
     return (
         <div>
             <h2>Todo List</h2>
-            <TodoList todoList={todoList} deleteTodo={deleteTodo}/>
+            <TodoList todoList={todoList} deleteTodo={deleteTodo} updateTodo={updateTodo}/>
         </div>
     );
 }
