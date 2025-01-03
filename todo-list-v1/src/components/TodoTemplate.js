@@ -18,6 +18,7 @@ const makeTodo = () => {
 */
 export default function TodoTemplate() {
     const [todoList, setTodoList] = useState(makeTodo());
+    console.log(todoList);
     return (
         <div>
             <h2>Todo List</h2>

@@ -1,7 +1,7 @@
 import TodoListItem from "./TodoListItem";
 
 export default function TodoList({todoList}) {
-    
+    console.log(todoList)
     return (
         <div>
             <table className="table">
