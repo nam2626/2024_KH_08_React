@@ -16,8 +16,8 @@ export default () => {
   return (
     <>
       <h2>Counter</h2>
-      <button>+</button>
-      <button>-</button>
+      <button onClick={() => dispatch({type : 'INCREMENT'})}>+</button>
+      <button onClick={() => dispatch({type : 'DECREMENT'})}>-</button>
       <p>count : 0</p>
     </>
   );
