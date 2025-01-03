@@ -1,6 +1,6 @@
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 const makeTodo = () => {
     const todo = [];
     for (let i = 1; i <= 5; i++) {
@@ -39,8 +39,11 @@ export default function TodoTemplate() {
         });
     },[]);
 
+    let id = useRef(6);
     const addTodo = useCallback((text) => {
-        
+        setTodoList((todos) => {
+            return [...todos, {id: id.current++, text, done: false}];
+        });
     },[]);
 
     return (
