@@ -1,6 +1,7 @@
 import TodoListItem from "./TodoListItem";
 
-export default function TodoList() {
+export default function TodoList({todoList}) {
+    
     return (
         <div>
             <table className="table">
@@ -13,7 +14,12 @@ export default function TodoList() {
                     </tr>
                 </thead>
                 <tbody>
-                    <TodoListItem/>
+                    {
+                        todoList.map(todo => {
+                            return <TodoListItem key={todo.id} todo={todo}/>
+                        })
+                    }
+                    
                 </tbody>
             </table>
         </div>

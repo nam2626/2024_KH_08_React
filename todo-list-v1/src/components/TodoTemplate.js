@@ -21,7 +21,7 @@ export default function TodoTemplate() {
     return (
         <div>
             <h2>Todo List</h2>
-            <TodoList/>
+            <TodoList todoList={todoList}/>
         </div>
     );
 }
