@@ -6,6 +6,7 @@ import RefEx from './components/RefEx';
 import MemoEx from './components/MemoEx';
 import Callback from './components/Callback';
 import ContextComponent from './components/ContextComponent';
+import CounterReducer from './components/CounterReducer';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
       <Callback/>
       <hr/>
       <ContextComponent/>
+      <hr/>
+      <CounterReducer/>
     </div>
   );
 }
