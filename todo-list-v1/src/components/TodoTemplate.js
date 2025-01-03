@@ -1,3 +1,4 @@
+import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import { useCallback, useState } from "react";
 const makeTodo = () => {
@@ -38,10 +39,14 @@ export default function TodoTemplate() {
         });
     },[]);
 
+    const addTodo = useCallback((text) => {
+        
+    },[]);
 
     return (
         <div>
             <h2>Todo List</h2>
+            <TodoForm addTodo={addTodo}/>
             <TodoList todoList={todoList} deleteTodo={deleteTodo} updateTodo={updateTodo}/>
         </div>
     );
