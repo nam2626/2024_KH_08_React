@@ -10,7 +10,8 @@ const makeTodo = () => {
 }
 function reducer(state, action) {
     switch (action.type) {
-        
+        case 'DELETE':
+            return {...state, list: state.list.filter((todo) => todo.id !== action.payload)};
     }
     return state;
 }
@@ -19,10 +20,7 @@ export default function TodoTemplate() {
     const [todoList, dispatch] = useReducer(reducer,{list:makeTodo(),id:6});
     
     const deleteTodo = useCallback((id) => {
-        //id 값을 가지고 todoList에 있는 값을 제거
-        setTodoList((todos) => {
-            return todos.filter((todo) => todo.id !== id);
-        });
+        dispatch({type: 'DELETE', payload: id});
     },[]);
 
     const updateTodo = useCallback((id) => {
