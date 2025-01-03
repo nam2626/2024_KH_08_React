@@ -12,15 +12,12 @@ function reducer(state, action) {
 export default function CounterReducer() {
     const [count, dispatch] = useReducer(reducer, {value : 0});
 
-    const addCount = () => setCount(count + 1);
-    const minusCount = () => setCount(count - 1);
-
     return (
         <div>
             <h2>useReducer 테스트</h2>
-            <p>count : {count}</p>
-            <button onClick={addCount}>+</button>
-            <button onClick={minusCount}>-</button>
+            <p>count : {count.value}</p>
+            <button onClick={() => dispatch({type : 'INCREMENT'})}>+</button>
+            <button onClick={() => dispatch({type : 'DECREMENT'})}>-</button>
         </div>
     );
 }
