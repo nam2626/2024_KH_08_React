@@ -1,5 +1,5 @@
 import TodoList from "./TodoList";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 const makeTodo = () => {
     const todo = [];
     for (let i = 1; i <= 5; i++) {
@@ -19,12 +19,12 @@ const makeTodo = () => {
 export default function TodoTemplate() {
     const [todoList, setTodoList] = useState(makeTodo());
     console.log(todoList);
-    const deleteTodo = (id) => {
+    const deleteTodo = useCallback((id) => {
         //id 값을 가지고 toList에 있는 값을 제거
         setTodoList((todos) => {
             return todos.filter((todo) => todo.id !== id);
         });
-    }
+    },[]);
 
     return (
         <div>
