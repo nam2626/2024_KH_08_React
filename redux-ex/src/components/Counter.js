@@ -1,12 +1,18 @@
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment } from "../store/counterSlice";
+
 export default function Counter() {
+  const count = useSelector(state => state.counter.value);
+  const dispatch = useDispatch();
+
   retrun (
     <div>
       <h2>redux 예제</h2>
       <input type="text" /><button>증가</button>
       <hr/>
-      <button>+</button>
-      <span>{0}</span>
-      <button>-</button>
+      <button onClick={dispatch(increment())}>+</button>
+      <span>{count}</span>
+      <button onClick={dispatch(decrement())}>-</button>
     </div>
   );
 }
