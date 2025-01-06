@@ -5,14 +5,14 @@ export default function Counter() {
   const count = useSelector(state => state.counter.value);
   const dispatch = useDispatch();
 
-  retrun (
+  return (
     <div>
       <h2>redux 예제</h2>
       <input type="text" /><button>증가</button>
       <hr/>
-      <button onClick={dispatch(increment())}>+</button>
+      <button onClick={() => dispatch(increment())}>+</button>
       <span>{count}</span>
-      <button onClick={dispatch(decrement())}>-</button>
+      <button onClick={() => dispatch(decrement())}>-</button>
     </div>
   );
 }
