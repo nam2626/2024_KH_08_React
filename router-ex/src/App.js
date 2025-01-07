@@ -8,6 +8,7 @@ import NotFoundPage from './page/NotFoundPage';
 import PostDetailPage from './page/PostDetailPage';
 import CompanyPage from './page/CompanyPage';
 import TeamPage from './page/TeamPage';
+import SomeComponent from './page/SomeComponent';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="*" element={<NotFoundPage/>}></Route>
         {/* 게시글 상세 페이지 지정 */}
         <Route path="/post/:id" element={<PostDetailPage/>}></Route>
+        <Route path="/some" element={<SomeComponent/>}></Route>
       </Routes>
     </BrowserRouter>
   );
