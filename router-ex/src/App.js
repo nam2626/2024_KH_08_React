@@ -7,6 +7,7 @@ import AboutPage from './page/AboutPage';
 import NotFoundPage from './page/NotFoundPage';
 import PostDetailPage from './page/PostDetailPage';
 import CompanyPage from './page/CompanyPage';
+import TeamPage from './page/TeamPage';
 
 function App() {
   return (
@@ -19,8 +20,8 @@ function App() {
         <Route path="/" element={<HomePage/>}></Route>
         {/* /about 경로 */}
         <Route path="/about" element={<AboutPage/>}>
-          <Route path="/team" element={<TeamPage/>}></Route>
-          <Route path="/company" element={<CompanyPage/>}></Route>
+          <Route path="team" element={<TeamPage />}></Route>
+          <Route path="company" element={<CompanyPage/>}></Route>
         </Route>
         {/* 없는 경로, 잘못된 경로로 접근했을 때 */}
         <Route path="*" element={<NotFoundPage/>}></Route>
