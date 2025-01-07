@@ -5,6 +5,7 @@ import Header from './components/Header';
 import HomePage from './page/HomePage';
 import AboutPage from './page/AboutPage';
 import NotFoundPage from './page/NotFoundPage';
+import PostDetailPage from './page/PostDetailPage';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route path="/about" element={<AboutPage/>}></Route>
         {/* 없는 경로, 잘못된 경로로 접근했을 때 */}
         <Route path="*" element={<NotFoundPage/>}></Route>
+        {/* 게시글 상세 페이지 지정 */}
+        <Route path="/post/:id" element={<PostDetailPage/>}></Route>
       </Routes>
     </BrowserRouter>
   );
