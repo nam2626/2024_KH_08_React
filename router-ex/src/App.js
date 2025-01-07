@@ -1,24 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import HomePage from './page/HomePage';
+import AboutPage from './page/AboutPage';
+import NotFoundPage from './page/NotFoundPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Header/>
+      <hr/>
+      <Routes>
+        {/* Route가 경로별로 렌더링할 컴포넌트 지정 */}
+        {/* 기본 경로 */}
+        <Route path="/" element={<HomePage/>}></Route>
+        {/* /about 경로 */}
+        <Route path="/about" element={<AboutPage/>}></Route>
+        {/* 없는 경로, 잘못된 경로로 접근했을 때 */}
+        <Route path="*" element={<NotFoundPage/>}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
