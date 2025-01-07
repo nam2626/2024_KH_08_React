@@ -6,6 +6,7 @@ import HomePage from './page/HomePage';
 import AboutPage from './page/AboutPage';
 import NotFoundPage from './page/NotFoundPage';
 import PostDetailPage from './page/PostDetailPage';
+import CompanyPage from './page/CompanyPage';
 
 function App() {
   return (
@@ -17,7 +18,10 @@ function App() {
         {/* 기본 경로 */}
         <Route path="/" element={<HomePage/>}></Route>
         {/* /about 경로 */}
-        <Route path="/about" element={<AboutPage/>}></Route>
+        <Route path="/about" element={<AboutPage/>}>
+          <Route path="/team" element={<TeamPage/>}></Route>
+          <Route path="/company" element={<CompanyPage/>}></Route>
+        </Route>
         {/* 없는 경로, 잘못된 경로로 접근했을 때 */}
         <Route path="*" element={<NotFoundPage/>}></Route>
         {/* 게시글 상세 페이지 지정 */}
