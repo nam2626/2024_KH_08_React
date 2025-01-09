@@ -5,7 +5,9 @@ export default function Home() {
   //axios 이용해서 전체 회원 데이터 읽어오는 코드 작성
   //   /member/list  <--- Get
   const [memberList,setMemberList] = useState([]);
-  
+  const refreshMemberList = (list) => {
+    setMemberList(list);
+  }
   useEffect(() => {
       axios.get('http://localhost:9999/member/list').then(res => {
         setMemberList(res.data);
@@ -28,7 +30,7 @@ export default function Home() {
         </thead>
         <tbody>
           {
-            memberList.map(item=><MemberItem id={item.id} username={item.userName} nickname={item.nickName} grade={item.grade}/>)
+            memberList.map(item=><MemberItem id={item.id} username={item.userName} nickname={item.nickName} grade={item.grade} refreshMemberList={refreshMemberList}/>)
           }
         </tbody>
       </table>

@@ -17,7 +17,7 @@ function gradeName(grade){
       return '-';
   }
 }
-export default function MemberItem({id, username, nickname, grade}) {
+export default function MemberItem({id, username, nickname, grade, refreshMemberList}) {
   const deleteMember = () => {
     if(window.confirm(id+' 사용자를 삭제하시겠습니까?')){
       axios.delete(`http://localhost:9999/member/delete`,
@@ -27,6 +27,7 @@ export default function MemberItem({id, username, nickname, grade}) {
       ).then(res => {
         console.log(res);
         //list를 최신화
+        refreshMemberList(res.data.list);
       });
     }
 
