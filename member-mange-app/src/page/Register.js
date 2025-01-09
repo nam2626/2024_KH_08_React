@@ -43,6 +43,10 @@ export default function Register() {
       }
     }).then(res => {
       console.log(res.data);
+      if(res.data.count != 0) {
+        //회원 등록 완료 후 로그인 페이지로 이동
+        navigate('/');
+      }
     }).catch(err => {
       console.log(err);
     });
