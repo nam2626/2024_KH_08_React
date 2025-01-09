@@ -23,6 +23,7 @@ export default function Home() {
             <th>이름</th>
             <th>닉네임</th>
             <th>회원등급</th>
+            <th>삭제</th>
           </tr>
         </thead>
         <tbody>

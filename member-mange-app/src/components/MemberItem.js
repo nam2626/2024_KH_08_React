@@ -1,3 +1,4 @@
+import axios from "axios";
 function gradeName(grade){
   switch(grade){
     case 0:
@@ -17,12 +18,26 @@ function gradeName(grade){
   }
 }
 export default function MemberItem({id, username, nickname, grade}) {
+  const deleteMember = () => {
+    if(window.confirm(id+' 사용자를 삭제하시겠습니까?')){
+      axios.delete(`http://localhost:9999/member/delete`,
+        {
+          data : {id : id}
+        }
+      ).then(res => {
+        console.log(res);
+        //list를 최신화
+      });
+    }
+
+  };
   return (
     <tr>
       <td>{id}</td>
       <td>{username}</td>
       <td>{nickname}</td>
       <td>{gradeName(grade)}</td>
+      <td><button onClick={deleteMember}>삭제</button></td>
     </tr>
   );
 }
