@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { saveInfo } from '../store/MemberSlice';
+import { jwtDecode } from 'jwt-decode';
+
 export default function Login() {
   const id = useRef(null);
   const pwd = useRef(null);
@@ -21,6 +23,8 @@ export default function Login() {
       //redux에 로그인 정보 저장
       if(res.data.flag){
         dispatch(saveInfo(res.data));
+        const decodeToken = jwtDecode(res.data.token);
+        console.log(decodeToken);
         navigate('/');
       }else{
         //실패하면 경고창 출력

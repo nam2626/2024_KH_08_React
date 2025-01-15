@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { jwtDecode } from 'jwt-decode';
+import { useSelector } from 'react-redux';
 export const MemberSlice = createSlice({
   name : 'member',
   initialState : {
@@ -17,5 +19,5 @@ export const MemberSlice = createSlice({
 
 });
 
-export const {saveInfo, clearInfo} = MemberSlice.actions;
+export const {saveInfo, clearInfo, getUserId} = MemberSlice.actions;
 export default MemberSlice.reducer;
