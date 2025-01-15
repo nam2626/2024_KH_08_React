@@ -1,9 +1,14 @@
 import { useRef } from 'react';
 import './../css/Login.css';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { saveInfo } from '../store/MemberSlice';
 export default function Login() {
   const id = useRef(null);
   const pwd = useRef(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const loginHandler = () => {
     const data = {
       id : id.current.value,
@@ -12,6 +17,16 @@ export default function Login() {
     axios.post('http://localhost:9999/member/login', data)
     .then(res => {
       console.log(res.data);
+      //로그인 성공하면 Home으로 이동
+      //redux에 로그인 정보 저장
+      if(res.data.flag){
+        dispatch(saveInfo(res.data));
+        navigate('/');
+      }else{
+        //실패하면 경고창 출력
+        alert('아이디와 비밀번호를 확인하세요');
+      }
+
     }).catch(err => {
       console.log(err);
     });
