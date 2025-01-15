@@ -19,5 +19,5 @@ export const MemberSlice = createSlice({
 
 });
 
-export const {saveInfo, clearInfo, getUserId} = MemberSlice.actions;
+export const {saveInfo, clearInfo } = MemberSlice.actions;
 export default MemberSlice.reducer;

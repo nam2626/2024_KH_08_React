@@ -16,9 +16,11 @@ nav ul {
   display: flex;
   justify-content: start;
   flex-flow: row nowrap;
+  margin:0;
 }
 nav ul > li {
   text-align: center;
+
 }
 nav a:link, nav a:visited {
   display: inline-block;
