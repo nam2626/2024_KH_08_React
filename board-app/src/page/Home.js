@@ -2,15 +2,13 @@ import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import './../css/Home.css';
 export default function Home() {
-  const [pageNo, setPageNo] = useState(1);
-  const [pageContentEa, setPageContentEa] = useState(20);
   const [boardList, setBoardList] = useState([]);
   const [pagging, setPagging] = useState({});
 
   // 홈 컴포넌트가 렌더링 될때 게시글 목록을 출력
   // axios 이용해서 첫번째 페이지 데이터를 가져옴
   // 게시글, 페이징 목록을 가져옴
-  const pageRequest = useCallback(() => {
+  const pageRequest = useCallback((pageNo=1, pageContentEa=20) => {
     axios
       .get(
         `http://localhost:9999/board/list?pageNo=${pageNo}&pageContentEa=${pageContentEa}`
@@ -25,6 +23,10 @@ export default function Home() {
   useEffect(() => {
     pageRequest();
   }, []);
+
+  if(boardList.length === 0 || !pagging) {
+    return null;
+  }
 
   return (
     <div>
@@ -62,7 +64,12 @@ export default function Home() {
             <td colSpan="7">
               {/* 페이징 정보 출력 */}
               <div className="board_footer">
-              
+                {
+                  Array.from({ length : 4 }, ( _ , i) => {
+                    const pageNo = i + pagging.startPageOfPageGroup;
+                    return <a key={pageNo} onClick={(e) => pageRequest(pageNo)}>{pageNo}</a>
+                  })
+                }
 
               </div>
             </td>
