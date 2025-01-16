@@ -4,10 +4,11 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import '../css/main.css';
 import '../css/BoardViewPage.css';
+import { jwtDecode } from "jwt-decode";
 
 export default function BoardView() {
   const [data, setData] = useState({});
-  const [comment, setComment] = useState([]);
+  const [commentList, setCommentList] = useState([]);
   const [board, setBoard] = useState({});
   const [file, setFileList] = useState([]);
   const user = useSelector(state => state.member.value);
@@ -24,11 +25,11 @@ export default function BoardView() {
       setData(res.data);
       setBoard(res.data.board);
       setFileList(res.data.fileList);
-      setComment(res.data.commentList);
+      setCommentList(res.data.commentList);
     })
     .catch(err => console.log(err));
   },[]);
-
+  const decodeToken = user.token ? jwtDecode(user.token) : '';
   // 게시글 출력
   // 첨부파일 목록 출력
   // 댓글 목록 출력
@@ -96,9 +97,24 @@ export default function BoardView() {
       </table>
       <hr/>
       <div className="comment_container">
-       
-        </div>
-        <button type="button" id="btn_more" >댓글 더보기</button>            
+        { commentList.length == 0 ? <p>댓글이 없습니다.</p> : 
+        commentList.map((comment, idx) => <div className="comment" key={idx}>
+				<p>
+					<input type="hidden" name="cno" value={comment.cno }/>
+					<span>{comment.id }</span>
+					<span>작성일 : {comment.cdate }</span>
+					<span><a href="#" className="btn_comment_like">좋아요 : <span>{comment.clike }</span></a></span>
+					<span><a href="#" className="btn_comment_hate">싫어요 : <span>{comment.chate}</span></a></span>
+          {
+              decodeToken.sub === comment.id && <><button type="button" class="btn_comment_delete">댓글 삭제</button><button type="button" class="btn_comment_update">댓글 수정</button></>
+          }
+				</p>
+				<p>{comment.content }</p>
+				
+			</div>
+        )};
+      </div>
+      <button type="button" id="btn_more" >댓글 더보기</button>            
     </div>
   );
 }
