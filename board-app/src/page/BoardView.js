@@ -26,6 +26,7 @@ export default function BoardView() {
       setBoard(res.data.board);
       setFileList(res.data.fileList);
       setCommentList(res.data.commentList);
+      commentCount.current += res.data.commentList.length;
     })
     .catch(err => console.log(err));
   },[]);
@@ -36,8 +37,10 @@ export default function BoardView() {
     {
       params : { start : commentCount.current }
     }).then(res => {
-      
-    }).error(err => console.log(err));
+      console.log(res.data);
+      commentCount.current += res.data.length;
+      setCommentList([...commentList, ...res.data]);
+    }).catch(err => console.log(err));
   }
 
   // 게시글 출력
