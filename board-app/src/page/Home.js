@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import "./../css/Home.css";
+import { Link } from "react-router-dom";
 export default function Home() {
   const [boardList, setBoardList] = useState([]);
   const [pagging, setPagging] = useState({});
@@ -47,7 +48,7 @@ export default function Home() {
             return (
               <tr key={board.bno}>
                 <td>{board.bno}</td>
-                <td>{board.title}</td>
+                <td><Link to={"/board/"+board.bno}>{board.title}</Link></td>
                 <td>{board.nickName}</td>
                 <td>{board.writeDate}</td>
                 <td>{board.bcount}</td>
