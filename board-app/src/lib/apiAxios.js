@@ -10,8 +10,9 @@ const apiAxios = axios.create({
 //요청 인터셉터 추가
 apiAxios.interceptors.request.use(
   (config) => {
+    console.log('request')
     //요청 전처리 부분
-    console.log(config.method.toUpperCase(), ' - '. config.url);
+    console.log(config.method.toUpperCase(), ' - ', config.url);
     return config;
   },
   (error) => {
@@ -25,7 +26,9 @@ apiAxios.interceptors.request.use(
 apiAxios.interceptors.response.use(
   (response) => {
     //응답 전처리 부분
-    console.log(response.config.method.toUpperCase(), ' - '. response.config.url);
+    console.log('reponse')
+    console.log(response.data);
+    console.log(response.config.method.toUpperCase(), ' - ', response.config.url);
     return response;
   },
   (error) => {  

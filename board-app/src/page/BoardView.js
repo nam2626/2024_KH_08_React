@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import '../css/main.css';
 import '../css/BoardViewPage.css';
 import { jwtDecode } from "jwt-decode";
+import apiAxios from "../lib/apiAxios";
 
 export default function BoardView() {
   const [data, setData] = useState({});
@@ -19,7 +20,7 @@ export default function BoardView() {
   // axios로 게시글 데이터를 요청해서 받음
   
   useEffect(() => {
-    axios.get(`http://localhost:9999/board/${bno}`)
+    apiAxios.get(`/board/${bno}`)
     .then(res => {
       console.log(res.data);
       setData(res.data);
@@ -33,7 +34,7 @@ export default function BoardView() {
   const decodeToken = user.token ? jwtDecode(user.token) : '';
 
   const moreComment = () => {
-    axios.get(`http://localhost:9999/board/comment/${bno}`,
+    apiAxios.get(`/board/comment/${bno}`,
     {
       params : { start : commentCount.current }
     }).then(res => {

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
+import apiAxios from "../lib/apiAxios";
 import "./../css/Home.css";
 import { Link } from "react-router-dom";
 export default function Home() {
@@ -10,9 +11,9 @@ export default function Home() {
   // axios 이용해서 첫번째 페이지 데이터를 가져옴
   // 게시글, 페이징 목록을 가져옴
   const pageRequest = useCallback((pageNo = 1, pageContentEa = 20) => {
-    axios
+    apiAxios
       .get(
-        `http://localhost:9999/board/list?pageNo=${pageNo}&pageContentEa=${pageContentEa}`
+        `/board/list?pageNo=${pageNo}&pageContentEa=${pageContentEa}`
       )
       .then((res) => {
         console.log(res.data);
