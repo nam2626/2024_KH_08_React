@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import './../css/Home.css';
+import "./../css/Home.css";
 export default function Home() {
   const [boardList, setBoardList] = useState([]);
   const [pagging, setPagging] = useState({});
@@ -8,7 +8,7 @@ export default function Home() {
   // 홈 컴포넌트가 렌더링 될때 게시글 목록을 출력
   // axios 이용해서 첫번째 페이지 데이터를 가져옴
   // 게시글, 페이징 목록을 가져옴
-  const pageRequest = useCallback((pageNo=1, pageContentEa=20) => {
+  const pageRequest = useCallback((pageNo = 1, pageContentEa = 20) => {
     axios
       .get(
         `http://localhost:9999/board/list?pageNo=${pageNo}&pageContentEa=${pageContentEa}`
@@ -24,7 +24,7 @@ export default function Home() {
     pageRequest();
   }, []);
 
-  if(boardList.length === 0 || !pagging) {
+  if (boardList.length === 0 || !pagging) {
     return null;
   }
 
@@ -43,34 +43,52 @@ export default function Home() {
           </tr>
         </thead>
         <tbody>
-          {
-            boardList.map(board => {
-              return (
-                <tr key={board.bno}>
-                  <td>{board.bno}</td>
-                  <td>{board.title}</td>
-                  <td>{board.nickName}</td>
-                  <td>{board.writeDate}</td>
-                  <td>{board.bcount}</td>
-                  <td>{board.blike}</td>
-                  <td>{board.bhate}</td>
-                </tr>
-              );
-            })
-          }
+          {boardList.map((board) => {
+            return (
+              <tr key={board.bno}>
+                <td>{board.bno}</td>
+                <td>{board.title}</td>
+                <td>{board.nickName}</td>
+                <td>{board.writeDate}</td>
+                <td>{board.bcount}</td>
+                <td>{board.blike}</td>
+                <td>{board.bhate}</td>
+              </tr>
+            );
+          })}
         </tbody>
         <tfoot>
           <tr>
             <td colSpan="7">
-              {/* 페이징 정보 출력 */}
               <div className="board_footer">
-                {
-                  Array.from({ length : 4 }, ( _ , i) => {
-                    const pageNo = i + pagging.startPageOfPageGroup;
-                    return <a key={pageNo} onClick={(e) => pageRequest(pageNo)}>{pageNo}</a>
-                  })
-                }
+                {/* 이전 페이지 그룹으로 이동 */}
+                {pagging.priviousPageGroup ? (
+                  <a
+                    onClick={(e) =>
+                      pageRequest(pagging.startPageOfPageGroup - 1)
+                    }
+                  >
+                    {"◀"}
+                  </a>
+                ) : null}
+                {/* 페이징 정보 출력 */}
+                {Array.from({ length: 4 }, (_, i) => {
+                  const pageNo = i + pagging.startPageOfPageGroup;
+                  return (
+                    <a key={pageNo} onClick={(e) => pageRequest(pageNo)}>
+                      {pageNo}
+                    </a>
+                  );
+                })}
 
+                {/* 다음 페이지 그룹으로 이동 */}
+                {pagging.nextPageGroup ? (
+                  <a
+                    onClick={(e) => pageRequest(pagging.endPageOfPageGroup + 1)}
+                  >
+                    {"▶"}
+                  </a>
+                ) : null}
               </div>
             </td>
           </tr>
