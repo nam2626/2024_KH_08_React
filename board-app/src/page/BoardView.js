@@ -30,6 +30,16 @@ export default function BoardView() {
     .catch(err => console.log(err));
   },[]);
   const decodeToken = user.token ? jwtDecode(user.token) : '';
+
+  const moreComment = () => {
+    axios.get(`http://localhost:9999/board/comment/${bno}`,
+    {
+      params : { start : commentCount.current }
+    }).then(res => {
+      
+    }).error(err => console.log(err));
+  }
+
   // 게시글 출력
   // 첨부파일 목록 출력
   // 댓글 목록 출력
@@ -75,7 +85,7 @@ export default function BoardView() {
                       <p>로그인 후 작성가능</p>
                   </div> : <div className="comment_form">
                         <textarea name="content" placeholder="댓글을 입력하세요"></textarea>
-                        <button type="button" >댓글작성</button>
+                        <button type="button"  >댓글작성</button>
                 </div>
         }
              </td>
@@ -114,7 +124,7 @@ export default function BoardView() {
 			</div>
         )};
       </div>
-      <button type="button" id="btn_more" >댓글 더보기</button>            
+      <button type="button" id="btn_more" onClick={moreComment}>댓글 더보기</button>            
     </div>
   );
 }
