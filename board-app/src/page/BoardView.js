@@ -83,7 +83,12 @@ export default function BoardView() {
        <td colSpan="2">
         <h3>첨부파일 목록</h3>
         <ul>
-         
+         {
+          file.map((item, idx) => <li key={idx}>
+            <a href={`http://localhost:9999/board/download/${item.fno}`}>
+              {item.fpath.split('\\').pop()}
+            </a></li>)
+         }
         </ul>
         </td>
      </tr>
