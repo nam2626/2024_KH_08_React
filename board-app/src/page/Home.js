@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-
+import './../css/Home.css';
 export default function Home() {
   const [pageNo, setPageNo] = useState(1);
   const [pageContentEa, setPageContentEa] = useState(20);
@@ -41,8 +41,33 @@ export default function Home() {
           </tr>
         </thead>
         <tbody>
-          
+          {
+            boardList.map(board => {
+              return (
+                <tr key={board.bno}>
+                  <td>{board.bno}</td>
+                  <td>{board.title}</td>
+                  <td>{board.nickName}</td>
+                  <td>{board.writeDate}</td>
+                  <td>{board.bcount}</td>
+                  <td>{board.blike}</td>
+                  <td>{board.bhate}</td>
+                </tr>
+              );
+            })
+          }
         </tbody>
+        <tfoot>
+          <tr>
+            <td colSpan="7">
+              {/* 페이징 정보 출력 */}
+              <div className="board_footer">
+              
+
+              </div>
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   );
