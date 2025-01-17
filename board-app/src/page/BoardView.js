@@ -45,7 +45,7 @@ export default function BoardView() {
     }).catch(err => console.log(err));
   }
 
-  //댓글 좋아요 처리 함수
+  //게시글 좋아요 처리 함수
   const boardLike = () => {
     apiAxios.get(`/board/like/${bno}`,{
       headers : {
@@ -60,7 +60,7 @@ export default function BoardView() {
     }).catch(err => console.log(err));
 
   }
-  //댓글 싫어요 처리 함수
+  //게시글 싫어요 처리 함수
   const boardHate = () => {
     apiAxios.get(`/board/hate/${bno}`,{
       headers : {
@@ -76,10 +76,38 @@ export default function BoardView() {
 
   }
 
+  //댓글 좋아요/싫어요
+  const commentLikeHate = (e, cno) => {
+    console.log(e.target.className);
+    apiAxios.get(`/board/comment/${e.target.className == 'btn_comment_like' ? 'like' : 'hate'}/${cno}`,{
+      headers : {
+        "Authorization" : `Bearer ${user.token}`
+      }
+    })
+    .then(res => {
+      alert(res.data.msg);
+      e.target.querySelector('span').innerHTML = res.data.count;
+    }).catch(err => console.log(err));
+  }
 
-  // 게시글 출력
-  // 첨부파일 목록 출력
-  // 댓글 목록 출력
+  const commentWrite = () => {
+    const data = {
+      content : commentContent.current.value,
+      bno : bno
+    }
+    apiAxios.post('/board/comment', data, {
+      headers : {
+        "Authorization" : `Bearer ${user.token}`
+      }
+    })
+    .then(res => {
+      console.log(res.data);
+      alert(res.data.msg);
+      setCommentList(res.data.commentList);
+      commentContent.current.value = '';
+    }).catch(err => console.log(err));
+  }
+
  
   return (
     <div id="board_view_container">
@@ -121,8 +149,8 @@ export default function BoardView() {
           user.token == null ? <div className="comment_form">
                       <p>로그인 후 작성가능</p>
                   </div> : <div className="comment_form">
-                        <textarea name="content" placeholder="댓글을 입력하세요"></textarea>
-                        <button type="button"  >댓글작성</button>
+                        <textarea name="content" ref={commentContent} placeholder="댓글을 입력하세요"></textarea>
+                        <button type="button" onClick={commentWrite} >댓글작성</button>
                 </div>
         }
              </td>
@@ -150,8 +178,8 @@ export default function BoardView() {
 					<input type="hidden" name="cno" value={comment.cno }/>
 					<span>{comment.id }</span>
 					<span>작성일 : {comment.cdate }</span>
-					<span><a href="#" className="btn_comment_like">좋아요 : <span>{comment.clike }</span></a></span>
-					<span><a href="#" className="btn_comment_hate">싫어요 : <span>{comment.chate}</span></a></span>
+					<span><a href="#" className="btn_comment_like" onClick={(e) => commentLikeHate(e, comment.cno)}>좋아요 : <span>{comment.clike }</span></a></span>
+					<span><a href="#" className="btn_comment_hate" onClick={(e) => commentLikeHate(e, comment.cno)}>싫어요 : <span>{comment.chate}</span></a></span>
           {
               decodeToken.sub === comment.id && <><button type="button" class="btn_comment_delete">댓글 삭제</button><button type="button" class="btn_comment_update">댓글 수정</button></>
           }
