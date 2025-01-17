@@ -33,6 +33,7 @@ export default function BoardView() {
   },[]);
   const decodeToken = user.token ? jwtDecode(user.token) : '';
 
+  //댓글 더보기
   const moreComment = () => {
     apiAxios.get(`/board/comment/${bno}`,
     {
@@ -43,6 +44,22 @@ export default function BoardView() {
       setCommentList([...commentList, ...res.data]);
     }).catch(err => console.log(err));
   }
+
+  //댓글 좋아요 처리 함수
+  const boardLike = () => {
+    apiAxios.get(`/board/like/${bno}`,{
+      headers : {
+        "Authorization" : `Bearer ${user.token}`
+      }
+    })
+    .then(res => {
+      alert(res.data.msg);
+      //좋아요 개수 최신화
+      
+    }).catch(err => console.log(err));
+
+  }
+
 
   // 게시글 출력
   // 첨부파일 목록 출력
@@ -76,7 +93,7 @@ export default function BoardView() {
         </tr>
         <tr>
           <td colSpan="2"> 
-            <a href="#" id="btn_like" >좋아요 : <span id="like_count">{board.blike}</span> </a>
+            <a href="#" id="btn_like" onClick={boardLike}>좋아요 : <span id="like_count">{board.blike}</span> </a>
             <a href="#" id="btn_hate">싫어요 : <span id="hate_count">{board.bhate}</span> </a>
           </td>
         </tr>
