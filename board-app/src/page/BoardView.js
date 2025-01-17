@@ -60,6 +60,21 @@ export default function BoardView() {
     }).catch(err => console.log(err));
 
   }
+  //댓글 싫어요 처리 함수
+  const boardHate = () => {
+    apiAxios.get(`/board/hate/${bno}`,{
+      headers : {
+        "Authorization" : `Bearer ${user.token}`
+      }
+    })
+    .then(res => {
+      alert(res.data.msg);
+      //좋아요 개수 최신화
+      setBoard({...board, bhate : res.data.count});
+
+    }).catch(err => console.log(err));
+
+  }
 
 
   // 게시글 출력
@@ -95,7 +110,7 @@ export default function BoardView() {
         <tr>
           <td colSpan="2"> 
             <a href="#" id="btn_like" onClick={boardLike}>좋아요 : <span id="like_count">{board.blike}</span> </a>
-            <a href="#" id="btn_hate">싫어요 : <span id="hate_count">{board.bhate}</span> </a>
+            <a href="#" id="btn_hate" onClick={boardHate}>싫어요 : <span id="hate_count">{board.bhate}</span> </a>
           </td>
         </tr>
         
