@@ -55,7 +55,8 @@ export default function BoardView() {
     .then(res => {
       alert(res.data.msg);
       //좋아요 개수 최신화
-      
+      setBoard({...board, blike : res.data.count});
+
     }).catch(err => console.log(err));
 
   }
