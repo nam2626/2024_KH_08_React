@@ -145,6 +145,8 @@ export default function BoardView() {
     })
     .then(res => {
       console.log(res.data);
+      setCommentList(res.data.commentList);
+      commentCount = res.data.commentList.length+1;
     }).catch(err => console.log(err));
   }
   return (
