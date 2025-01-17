@@ -18,7 +18,6 @@ export default function BoardView() {
   const commentCount = useRef(1);
   const navigator = useNavigate();
   // axios로 게시글 데이터를 요청해서 받음
-  
   useEffect(() => {
     apiAxios.get(`/board/${bno}`)
     .then(res => {
@@ -132,7 +131,7 @@ export default function BoardView() {
     e.target.parentElement.parentElement.querySelector('.comment_content').style.display = 'block';
   });
 
-  const commentUpdate = (cno, content) => {
+  const commentUpdate = (cno, content,e) => {
     console.log(cno, content);
     const data = {
       cno : cno,
@@ -145,8 +144,9 @@ export default function BoardView() {
     })
     .then(res => {
       console.log(res.data);
-      setCommentList(res.data.commentList);
-      commentCount = res.data.commentList.length+1;
+      setCommentList([...res.data.commentList]);
+      commentCount.current = res.data.commentList.length+1;
+      offUpdateCommentForm(e);
     }).catch(err => console.log(err));
   }
   return (
@@ -217,7 +217,7 @@ export default function BoardView() {
       <hr/>
       <div className="comment_container">
         { commentList.length == 0 ? <p>댓글이 없습니다.</p> : 
-        commentList.map((comment, idx) => <div className="comment" key={idx}>
+        commentList.map((comment, idx) => <div className="comment" key={comment.cno}>
 				<p>
 					<input type="hidden" name="cno" value={comment.cno }/>
 					<span>{comment.id }</span>
@@ -233,7 +233,8 @@ export default function BoardView() {
           decodeToken.sub === comment.id && <p className="comment_form" style={{display : 'none'}}>
             <textarea defaultValue={comment.content}></textarea>
             <button type="button" onClick={(e) => {
-              commentUpdate(comment.cno, e.target.previousElementSibling.value);
+              commentUpdate(comment.cno, e.target.previousElementSibling.value, e);
+              
             }}>댓글 수정하기</button>
             <button type="button" onClick={offUpdateCommentForm}>수정 취소</button>
           </p>
