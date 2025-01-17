@@ -132,6 +132,21 @@ export default function BoardView() {
     e.target.parentElement.parentElement.querySelector('.comment_content').style.display = 'block';
   });
 
+  const commentUpdate = (cno, content) => {
+    console.log(cno, content);
+    const data = {
+      cno : cno,
+      content : content
+    }
+    apiAxios.put('/board/comment', data, {
+      headers : {
+        "Authorization" : `Bearer ${user.token}`
+      }
+    })
+    .then(res => {
+      console.log(res.data);
+    }).catch(err => console.log(err));
+  }
   return (
     <div id="board_view_container">
       <table>
@@ -214,8 +229,10 @@ export default function BoardView() {
 				<p className="comment_content" style={{display : 'block'}}>{comment.content }</p>
         {
           decodeToken.sub === comment.id && <p className="comment_form" style={{display : 'none'}}>
-            <textarea>{comment.content}</textarea>
-            <button>댓글 수정하기</button>
+            <textarea defaultValue={comment.content}></textarea>
+            <button type="button" onClick={(e) => {
+              commentUpdate(comment.cno, e.target.previousElementSibling.value);
+            }}>댓글 수정하기</button>
             <button type="button" onClick={offUpdateCommentForm}>수정 취소</button>
           </p>
 
