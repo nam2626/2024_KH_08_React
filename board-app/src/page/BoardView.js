@@ -122,7 +122,16 @@ export default function BoardView() {
       }
     }).catch(err => console.log(err));
   }
- 
+  
+  const onUpdateCommentForm = useCallback((e) => {
+    e.target.parentElement.parentElement.querySelector('.comment_form').style.display = 'block';
+    e.target.parentElement.parentElement.querySelector('.comment_content').style.display = 'none';
+  });
+  const offUpdateCommentForm = useCallback((e) => {
+    e.target.parentElement.parentElement.querySelector('.comment_form').style.display = 'none';
+    e.target.parentElement.parentElement.querySelector('.comment_content').style.display = 'block';
+  });
+
   return (
     <div id="board_view_container">
       <table>
@@ -199,11 +208,18 @@ export default function BoardView() {
 					<span><a href="#" className="btn_comment_like" onClick={(e) => commentLikeHate(e, comment.cno)}>좋아요 : <span>{comment.clike }</span></a></span>
 					<span><a href="#" className="btn_comment_hate" onClick={(e) => commentLikeHate(e, comment.cno)}>싫어요 : <span>{comment.chate}</span></a></span>
           {
-              decodeToken.sub === comment.id && <><button type="button" class="btn_comment_delete">댓글 삭제</button><button type="button" class="btn_comment_update">댓글 수정</button></>
+              decodeToken.sub === comment.id && <><button type="button" className="btn_comment_delete">댓글 삭제</button><button type="button" className="btn_comment_update" onClick={onUpdateCommentForm}>댓글 수정</button></>
           }
 				</p>
-				<p>{comment.content }</p>
-				
+				<p className="comment_content" style={{display : 'block'}}>{comment.content }</p>
+        {
+          decodeToken.sub === comment.id && <p className="comment_form" style={{display : 'none'}}>
+            <textarea>{comment.content}</textarea>
+            <button>댓글 수정하기</button>
+            <button type="button" onClick={offUpdateCommentForm}>수정 취소</button>
+          </p>
+
+        }
 			</div>
         )};
       </div>
