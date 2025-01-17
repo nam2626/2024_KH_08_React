@@ -149,6 +149,21 @@ export default function BoardView() {
       offUpdateCommentForm(e);
     }).catch(err => console.log(err));
   }
+
+  const commentDelete = (cno) => {
+    apiAxios.delete(`/board/comment/${cno}`,{
+      headers : {
+        "Authorization" : `Bearer ${user.token}`
+      }
+    })
+    .then(res => {
+      console.log(res.data);
+      alert(res.data.msg);
+      setCommentList([...res.data.commentList]);
+      commentCount.current = res.data.commentList.length+1;
+    }).catch(err => console.log(err));
+  }
+
   return (
     <div id="board_view_container">
       <table>
@@ -225,7 +240,7 @@ export default function BoardView() {
 					<span><a href="#" className="btn_comment_like" onClick={(e) => commentLikeHate(e, comment.cno)}>좋아요 : <span>{comment.clike }</span></a></span>
 					<span><a href="#" className="btn_comment_hate" onClick={(e) => commentLikeHate(e, comment.cno)}>싫어요 : <span>{comment.chate}</span></a></span>
           {
-              decodeToken.sub === comment.id && <><button type="button" className="btn_comment_delete">댓글 삭제</button><button type="button" className="btn_comment_update" onClick={onUpdateCommentForm}>댓글 수정</button></>
+              decodeToken.sub === comment.id && <><button type="button" className="btn_comment_delete" onClick={() => commentDelete(comment.cno)}>댓글 삭제</button><button type="button" className="btn_comment_update" onClick={onUpdateCommentForm}>댓글 수정</button></>
           }
 				</p>
 				<p className="comment_content" style={{display : 'block'}}>{comment.content }</p>
