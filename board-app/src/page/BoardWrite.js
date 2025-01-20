@@ -35,8 +35,10 @@ export default function BoardWrite() {
     // JSON과 파일목록을 폼데이터로 변환
     const formData = new FormData();
     formData.append('params', JSON.stringify({title, content}));
+    // formData.append('title', title);
+    // formData.append('content', content);
     fileList.forEach((item) => {
-      formData.append('files', item);
+      formData.append('file', item);
     });
     apiAxios.post('/board/write',formData, {
       headers : {
@@ -45,7 +47,12 @@ export default function BoardWrite() {
       }
     }).then(res => {
       console.log(res);
-      navigate('/board/'+res.data.bno);
+      if(res.data.code == 1) 
+        navigate('/board/'+res.data.bno);
+      else{
+        alert(res.data.msg);
+        navigate('/login');
+      }
     }).catch(err => {
       console.log(err);
       alert('게시판 글쓰기 실패');
