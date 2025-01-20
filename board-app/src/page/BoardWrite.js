@@ -3,7 +3,7 @@ import {Editor} from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import apiAxios from '../lib/apiAxios';
 export default function BoardWrite() {
   const editor = useRef(null);
@@ -27,6 +27,13 @@ export default function BoardWrite() {
     setFileList((item) => [...item, ...Array.from(data.files)]);
   },[]);
 
+  //게시글 전송하는 함수
+  const boardWriteHandler = () => {
+    // 제목, 내용 JSON으로 변환
+    
+    // JSON과 파일목록을 폼데이터로 변환
+
+  }
 
 
   return (
