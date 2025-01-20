@@ -30,8 +30,26 @@ export default function BoardWrite() {
   //게시글 전송하는 함수
   const boardWriteHandler = () => {
     // 제목, 내용 JSON으로 변환
-    
+    const title = document.querySelector('#title').value;
+    const content = editor.current.getInstance().getMarkdown();
     // JSON과 파일목록을 폼데이터로 변환
+    const formData = new FormData();
+    formData.append('params', JSON.stringify({title, content}));
+    fileList.forEach((item) => {
+      formData.append('files', item);
+    });
+    apiAxios.post('/board/write',formData, {
+      headers : {
+        "Authorization" : `Bearer ${token}`,
+        "Content-Type" : "multipart/form-data"
+      }
+    }).then(res => {
+      console.log(res);
+      navigate('/board/'+res.data.bno);
+    }).catch(err => {
+      console.log(err);
+      alert('게시판 글쓰기 실패');
+    });
 
   }
 
@@ -49,8 +67,8 @@ export default function BoardWrite() {
                 previewStyle="vertical" height="500px" initialEditType="wysiwyg"/>
             </div>
             <div className="form-actions">
-                <button type="button" className="btn submit-btn">등록</button>
-                <a className="btn cancel-btn">취소</a>
+                <button type="button" className="btn submit-btn" onClick={boardWriteHandler}>등록</button>
+                <a className="btn cancel-btn" onClick={() => navigate(-1)}>취소</a>
             </div>
             <div className="file_drop_area" onDrop={fileDropHandler}
             onDragOver={(e) => e.preventDefault()} onDragEnter={(e) => e.preventDefault()}></div>
